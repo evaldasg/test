@@ -2,7 +2,7 @@
 lock "3.8.0"
 
 set :application, "test"
-set :repo_url, "git@github:evaldasg/test.git"
+set :repo_url, "git@github.com:evaldasg/test.git"
 set :branch, 'master'
 set :user, 'deployer'
 set :use_sudo, false
