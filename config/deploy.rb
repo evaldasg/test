@@ -18,7 +18,8 @@ set :passenger_roles, :app
 set :passenger_restart_runner, :sequence
 set :passenger_restart_wait, 5
 set :passenger_restart_limit, 2
-set :passenger_restart_with_sudo, true
+set :passenger_restart_with_sudo, false
+set :passenger_restart_with_touch, false
 set :passenger_restart_options, -> { "#{fetch(:deploy_to)}/current --ignore-app-not-running" }
 set :linked_files, %w(
   config/database.yml
