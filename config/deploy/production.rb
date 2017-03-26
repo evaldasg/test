@@ -13,7 +13,7 @@ role :app, %w(deployer@212.24.105.191)
 role :web, %w(deployer@212.24.105.191)
 role :db, %w(deployer@212.24.105.191)
 
-set :npm_target_path, -> { release_path.join('node_modules') } # default not set
+set :npm_target_path, -> { release_path.join('forntend', 'node_modules') } # default not set
 set :npm_flags, '--production --silent --no-progress'    # default
 set :npm_roles, :all                                     # default
 set :npm_env_variables, {}                               # default
