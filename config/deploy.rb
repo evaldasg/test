@@ -28,7 +28,6 @@ set :linked_files, %w(
 
 set :linked_dirs, %w(
   log
-  frontend/node_modules
   tmp/pids
   tmp/cache
   tmp/campr
