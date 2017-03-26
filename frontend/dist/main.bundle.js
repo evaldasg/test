@@ -9521,9 +9521,7 @@ var App = function (_React$Component) {
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'li',
             { key: user.id },
-            user.id,
-            ') ',
-            user.name
+            user.id + ') ' + user.first_name + ' ' + user.last_name
           );
         })
       )

@@ -25,7 +25,7 @@ class App extends React.Component {
         <h1>"It's Working!!!"</h1>
         <ul>
           {users.length && users.map((user) => (
-            <li key={user.id}>{user.id}) {user.name}</li>
+            <li key={user.id}>{`${user.id}) ${user.first_name} ${user.last_name}`}</li>
           ))}
         </ul>
       </div>
