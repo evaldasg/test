@@ -10,10 +10,12 @@
   },
   "author": "Evaldas",
   "dependencies": {
+    "es6-promise": "^4.1.0",
     "express": "^4.15.2",
     "lodash": "^4.17.4",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.24.0",
