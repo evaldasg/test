@@ -1,38 +1,30 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Home from './Home'
+import NavBar from './NavBar'
 
 import './css/style';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      users: []
-    }
-  }
+const About = () => (
+  <div>
+    <h2>About</h2>
+  </div>
+)
 
-  componentDidMount() {
-    fetch('api/v1/users')
-      .then((response) => response.json())
-      .then((data) => this.setState({ users: data }))
-  }
+const Profile = () => (
+  <div>
+    <h2>Profile</h2>
+  </div>
+)
 
-  render() {
-    const { users } = this.state
+const App = () => (
+  <div className="container">
+    <NavBar />
+    <Route exact path="/" component={Home}/>
+    <Route path="/about" component={About}/>
+    <Route path="/profile" component={Profile}/>
+  </div>
+)
 
-    if (!users.length) { return <div>No users.</div> }
-
-    return (
-      <div className="container">
-        <h1>"It's Working!!!"</h1>
-        <ul>
-          {users.length && users.map((user) => (
-            <li key={user.id}>{`${user.id}) ${user.first_name} ${user.last_name}`}</li>
-          ))}
-        </ul>
-      </div>
-    )
-  }
-}
-
-render(<App />, document.getElementById('app'))
+render(<Router><App /></Router>, document.getElementById('app'))
