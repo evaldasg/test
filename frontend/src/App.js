@@ -1,10 +1,8 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import {  Route } from 'react-router-dom'
 import Home from './Home'
 import NavBar from './NavBar'
-
-import './css/style';
 
 const About = () => (
   <div>
@@ -27,4 +25,4 @@ const App = () => (
   </div>
 )
 
-render(<Router><App /></Router>, document.getElementById('app'))
+export default App
