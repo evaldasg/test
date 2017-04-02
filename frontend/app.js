@@ -12,6 +12,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.get('*', (req, res) => {
+  console.log(`${req.method} ${req.url}`)
   res.send(template())
 })
 
