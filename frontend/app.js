@@ -15,9 +15,9 @@ const App = require('./src/App').default
 
 const server = express()
 
-server.use('/assets', express.static('./dist'))
-
 if (process.env.NODE_ENV === 'development') {
+  server.use('/assets', express.static('./dist'))
+
   const httpProxy = require('http-proxy')
   const apiProxy = httpProxy.createProxyServer()
   const apiServer = 'http://localhost:3000'
@@ -29,7 +29,9 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 server.use((req, res) => {
-  console.log(`[${process.env.NODE_ENV}] ${req.method} for ${req.url}`)
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[${process.env.NODE_ENV}] ${req.method} for ${req.url}`)
+  }
   const context = {}
   const body = ReactDOMServer.renderToString(
     React.createElement(StaticRouter, { location: req.url, context: context },
@@ -40,11 +42,7 @@ server.use((req, res) => {
   res.write(template({ body: body }))
   res.end()
 })
-// app.get('*', (req, res) => {
-//   console.log(`${req.method} ${req.url}`)
-//   res.send(template())
-// })
 
 server.listen(port, () => {
-  console.log(`Listening on port ${port}...`)
+  console.log(`Listening on port ${port} NODE_ENV: [${process.env.NODE_ENV}].`)
 })

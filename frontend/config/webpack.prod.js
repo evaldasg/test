@@ -3,9 +3,9 @@ const { resolve } = require('path')
 const webpack = require('webpack')
 const commonConfig = require('./webpack.base');
 
-module.exports = function(env) {
+module.exports = function() {
   return webpackMerge(commonConfig(), {
-    entry: ['es6-promise', 'whatwg-fetch', './App.js'],
+    entry: ['es6-promise', 'whatwg-fetch', './MainApp.js'],
     output: {
       filename: '[name].bundle.js',
       path: resolve(__dirname, '../public'),
