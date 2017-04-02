@@ -23,13 +23,13 @@ if (process.env.NODE_ENV === 'development') {
   const apiServer = 'http://localhost:3000'
 
   server.all('/api/*', (req, res) => {
-    console.log(`${req.method} for ${req.url}`)
+    console.log(`[${process.env.NODE_ENV}] ${req.method} for ${req.url}`)
     apiProxy.web(req, res, {target: apiServer});
   })
 }
 
 server.use((req, res) => {
-  console.log(`${req.method} for ${req.url}`)
+  console.log(`[${process.env.NODE_ENV}] ${req.method} for ${req.url}`)
   const context = {}
   const body = ReactDOMServer.renderToString(
     React.createElement(StaticRouter, { location: req.url, context: context },
