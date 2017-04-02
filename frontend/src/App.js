@@ -1,8 +1,10 @@
 import React from 'react'
 import { render } from 'react-dom'
-import {  Route } from 'react-router-dom'
+import { Route } from 'react-router'
 import Home from './Home'
 import NavBar from './NavBar'
+
+//import './css/style'
 
 const About = () => (
   <div>
