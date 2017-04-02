@@ -10455,14 +10455,39 @@ var Profile = function Profile() {
   );
 };
 
+var NoMatch = function NoMatch(_ref) {
+  var location = _ref.location;
+  return _react2.default.createElement(
+    'div',
+    { className: 'alert alert-danger', role: 'alert' },
+    _react2.default.createElement(
+      'strong',
+      null,
+      'Oh snap!'
+    ),
+    ' Sorry, ',
+    _react2.default.createElement(
+      'code',
+      null,
+      location.pathname
+    ),
+    ' page not found!'
+  );
+};
+
 var App = function App() {
   return _react2.default.createElement(
     'div',
     { className: 'container' },
     _react2.default.createElement(_NavBar2.default, null),
-    _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/', component: _Home2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/about', component: About }),
-    _react2.default.createElement(_reactRouter.Route, { path: '/profile', component: Profile })
+    _react2.default.createElement(
+      _reactRouter.Switch,
+      null,
+      _react2.default.createElement(_reactRouter.Route, { exact: true, path: '/', component: _Home2.default }),
+      _react2.default.createElement(_reactRouter.Route, { path: '/about', component: About }),
+      _react2.default.createElement(_reactRouter.Route, { path: '/profile', component: Profile }),
+      _react2.default.createElement(_reactRouter.Route, { component: NoMatch })
+    )
   );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { Route } from 'react-router'
+import { Route, Switch } from 'react-router'
 import Home from './Home'
 import NavBar from './NavBar'
 
@@ -18,12 +18,22 @@ const Profile = () => (
   </div>
 )
 
+const NoMatch = ({ location }) => (
+  <div className="alert alert-danger" role="alert">
+    <strong>Oh snap!</strong> Sorry, <code>{location.pathname}</code> page not found!
+  </div>
+)
+
+
 const App = () => (
   <div className="container">
     <NavBar />
-    <Route exact path="/" component={Home}/>
-    <Route path="/about" component={About}/>
-    <Route path="/profile" component={Profile}/>
+    <Switch>
+      <Route exact path="/" component={Home}/>
+      <Route path="/about" component={About}/>
+      <Route path="/profile" component={Profile}/>
+      <Route component={NoMatch}/>
+    </Switch>
   </div>
 )
 
