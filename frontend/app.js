@@ -15,9 +15,9 @@ const App = require('./src/App').default
 
 const server = express()
 
-if (process.env.NODE_ENV === 'development') {
-  server.use('/assets', express.static('./dist'))
+server.use('/assets', express.static('./dist'))
 
+if (process.env.NODE_ENV === 'development') {
   const httpProxy = require('http-proxy')
   const apiProxy = httpProxy.createProxyServer()
   const apiServer = 'http://localhost:3000'
