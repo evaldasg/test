@@ -3,14 +3,13 @@ const { resolve } = require('path')
 const publicPath  = '/'
 
 const extractSass = new ExtractTextPlugin({
-    filename: "[name].css",
-    disable: process.env.NODE_ENV === "development"
+    filename: "[name].css"
 });
 
 module.exports = function() {
   return {
     context: resolve(__dirname, '../src'),
-    entry: './App.js',
+    entry: './MainApp.js',
     output: {
       filename: 'bundle.js',
       path: resolve(__dirname, '../dist'),

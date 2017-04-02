@@ -1,21 +1,50 @@
-const express = require('express')
-const fs = require('fs')
-const _ = require('lodash')
-const app = express()
-const port = 3001
-const baseTemplate = fs.readFileSync('./dist/index.prod.html')
-const template = _.template(baseTemplate)
+require('babel-register')
 
+const express = require('express')
+const React = require('react')
+const ReactDOMServer = require('react-dom/server')
+const ReactRouter = require('react-router')
+const StaticRouter = ReactRouter.StaticRouter
+const _ = require('lodash')
+const fs = require('fs')
+const port = 3001
+const indexHtml= (process.env.NODE_ENV === 'development') ? 'dist/index.dev' : 'public/index.prod'
+const baseTemplate = fs.readFileSync(`./${indexHtml}.html`)
+const template = _.template(baseTemplate)
+const App = require('./src/App').default
+
+const server = express()
 
 if (process.env.NODE_ENV === 'development') {
-  app.use('/assets', express.static('./public'))
+  server.use('/assets', express.static('./dist'))
+
+  const httpProxy = require('http-proxy')
+  const apiProxy = httpProxy.createProxyServer()
+  const apiServer = 'http://localhost:3000'
+
+  server.all('/api/*', (req, res) => {
+    console.log(`${req.method} for ${req.url}`)
+    apiProxy.web(req, res, {target: apiServer});
+  })
 }
 
-app.get('*', (req, res) => {
-  console.log(`${req.method} ${req.url}`)
-  res.send(template())
-})
+server.use((req, res) => {
+  console.log(`${req.method} for ${req.url}`)
+  const context = {}
+  const body = ReactDOMServer.renderToString(
+    React.createElement(StaticRouter, { location: req.url, context: context },
+      React.createElement(App)
+    )
+  )
 
-app.listen(port, () => {
+  res.write(template({ body: body }))
+  res.end()
+})
+// app.get('*', (req, res) => {
+//   console.log(`${req.method} ${req.url}`)
+//   res.send(template())
+// })
+
+server.listen(port, () => {
   console.log(`Listening on port ${port}...`)
 })
